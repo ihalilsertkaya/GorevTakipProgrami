@@ -1,0 +1,6 @@
+﻿services:
+  gorevtakipprogrami:
+    image: gorevtakipprogrami
+    build:
+      context: .
+      dockerfile: Dockerfile
