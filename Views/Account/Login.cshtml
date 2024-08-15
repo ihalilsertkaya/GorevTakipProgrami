@@ -9,12 +9,10 @@
         <meta content="Admin Dashboard" name="description" />
         <meta content="ThemeDesign" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-        <link rel="shortcut icon" href="assets/images/favicon.ico">
-
-        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="assets/css/icons.css" rel="stylesheet" type="text/css">
-        <link href="assets/css/style.css" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="/assets/images/favicon.ico">
+        <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="/assets/css/icons.css" rel="stylesheet" type="text/css">
+        <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
 
     </head>
     <body>
@@ -26,21 +24,34 @@
 
                 <div class="panel-body">
                     <h3 class="text-center m-t-0 m-b-30">
-                        <span class=""><img src="assets/images/logo_dark.png" alt="logo" height="32"></span>
+                        <span class=""><img src="/assets/images/logo_dark.png" alt="logo" height="32"></span>
                     </h3>
                     <h4 class="text-muted text-center m-t-0"><b>Giriş Yap</b></h4>
 
-                    <form class="form-horizontal m-t-20" asp-action="login">
+                    <form class="form-horizontal m-t-20" asp-action="Login">
+                        @if (!ViewData.ModelState.IsValid)
+                        {
+                        <div class="alert alert-danger" role="alert">
+                            @foreach (var key in ViewData.ModelState.Keys)
+                            {
+                            foreach (var error in ViewData.ModelState[key].Errors)
+                            {
+                            <span>@error.ErrorMessage</span>
 
+                            <br />
+                            }
+                            }
+                        </div>
+                        }
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <input class="form-control" type="text" required="" placeholder="Kullanıcı adı">
+                                <input class="form-control" type="text" name="Username" required="" placeholder="Kullanıcı adı">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <input class="form-control" type="password" required="" placeholder="Şifre">
+                                <input class="form-control" type="password" name="Password" required="" placeholder="Şifre">
                             </div>
                         </div>
 
@@ -75,19 +86,19 @@
             </div>
         </div>
         <!-- jQuery  -->
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/modernizr.min.js"></script>
-        <script src="assets/js/detect.js"></script>
-        <script src="assets/js/fastclick.js"></script>
-        <script src="assets/js/jquery.slimscroll.js"></script>
-        <script src="assets/js/jquery.blockUI.js"></script>
-        <script src="assets/js/waves.js"></script>
-        <script src="assets/js/wow.min.js"></script>
-        <script src="assets/js/jquery.nicescroll.js"></script>
-        <script src="assets/js/jquery.scrollTo.min.js"></script>
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>
+        <script src="/assets/js/modernizr.min.js"></script>
+        <script src="/assets/js/detect.js"></script>
+        <script src="/assets/js/fastclick.js"></script>
+        <script src="/assets/js/jquery.slimscroll.js"></script>
+        <script src="/assets/js/jquery.blockUI.js"></script>
+        <script src="/assets/js/waves.js"></script>
+        <script src="/assets/js/wow.min.js"></script>
+        <script src="/assets/js/jquery.nicescroll.js"></script>
+        <script src="/assets/js/jquery.scrollTo.min.js"></script>
 
-        <script src="assets/js/app.js"></script>
+        <script src="/assets/js/app.js"></script>
 
     </body>
 </html>
