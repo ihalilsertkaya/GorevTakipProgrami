@@ -1,0 +1,33 @@
+name: Build and Deploy Docker Container
+
+on:
+  push:
+    branches:
+      - main  # Sadece main branch'e push yapıldığında çalışacak
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the code
+      uses: actions/checkout@v2
+
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Copy project files to server
+      run: |
+        scp -r . user@your_server_ip:/home/user/your_project_directory
+
+    - name: Build and run Docker container on server
+      run: |
+        ssh user@your_server_ip << 'EOF'
+          cd /home/user/your_project_directory
+          docker build -t your-image-name:latest .
+          docker stop your-container-name || true
+          docker rm your-container-name || true
+          docker run -d -p 8080:8080 --name your-container-name your-image-name:latest
+        EOF
