@@ -21,6 +21,7 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          ${{ secrets.SERVER_COMMAND}}
+          ${{ secrets.SERVER_COMMAND }}
+          ${{ secrets.PROJECT_PATH }}
           docker-compose down || true
           docker-compose up --build -d
