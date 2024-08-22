@@ -7,16 +7,10 @@ using GorevTakipProgrami.Models;
 
 namespace GorevTakipProgrami.Controllers;
 
-public class HomeController : Controller
+public class HomeController : BaseController
 {
-    private readonly ILogger<HomeController> _logger;
-    private readonly AppDbContext _context;
-
-    public HomeController(ILogger<HomeController> logger, AppDbContext context)
-    {
-        _context = context;
-        _logger = logger;
-    }
+    public HomeController(ILogger<HomeController> logger, AppDbContext context): base(context, logger)
+    {}
     
     public IActionResult Index()
     {
@@ -33,10 +27,6 @@ public class HomeController : Controller
 
     public IActionResult InvitePerson()
     {
-        if (string.IsNullOrEmpty(HttpContext.Session.GetString("Username")))
-        {
-            return RedirectToAction("Login", "Account");
-        }
         return View();
     }
 
