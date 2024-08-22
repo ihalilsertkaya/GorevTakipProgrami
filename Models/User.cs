@@ -16,6 +16,8 @@ public partial class User
     public string? FullName { get; set; }
 
     public string? Role { get; set; }
+    
+    public string? UserPhoto { get; set; }
 
     public DateTime? CreatedAt { get; set; }
 

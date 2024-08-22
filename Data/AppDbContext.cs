@@ -23,13 +23,59 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<TaskHistory> TaskHistories { get; set; }
 
     public virtual DbSet<TaskNotification> TaskNotifications { get; set; }
+    public virtual DbSet<InvitePersonToken> InvitePersonTokens { get; set; }
 
+    public virtual DbSet<PasswordResetToken> PasswordResetTokens { get; set; }
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<UserTask> UserTasks { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<InvitePersonToken>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+
+            entity.HasIndex(e => e.Token)
+                .IsUnique()
+                .HasDatabaseName("UQ_InvitePersonTokens_Token");
+
+            entity.Property(e => e.Email)
+                .IsRequired()
+                .HasMaxLength(256);
+
+            entity.Property(e => e.Token)
+                .IsRequired();
+
+            entity.Property(e => e.ExpiryDate)
+                .IsRequired();
+
+            entity.Property(e => e.IsUsed)
+                .IsRequired()
+                .HasDefaultValue(false);
+        });
+        modelBuilder.Entity<PasswordResetToken>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+
+            entity.HasIndex(e => e.Token)
+                .IsUnique()
+                .HasDatabaseName("UQ_PasswordResetTokens_Token");
+
+            entity.Property(e => e.Email)
+                .IsRequired()
+                .HasMaxLength(256);
+
+            entity.Property(e => e.Token)
+                .IsRequired();
+
+            entity.Property(e => e.ExpiryDate)
+                .IsRequired();
+
+            entity.Property(e => e.IsUsed)
+                .IsRequired()
+                .HasDefaultValue(false);
+        });
         modelBuilder.Entity<DBTask>(entity =>
         {
             entity.HasKey(e => e.TaskId).HasName("PK__Tasks__7C6949D1B0C1BA05");
@@ -155,6 +201,9 @@ public partial class AppDbContext : DbContext
                 .IsUnicode(false)
                 .HasDefaultValue("User");
             entity.Property(e => e.Username)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.UserPhoto)
                 .HasMaxLength(255)
                 .IsUnicode(false);
         });
