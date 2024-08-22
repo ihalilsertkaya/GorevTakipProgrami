@@ -26,8 +26,8 @@
         <!-- LOGO -->
         <div class="topbar-left">
             <div class="text-center">
-                <a href="index.html" class="logo"><img src="/assets/images/logo_white_2.png" height="28"></a> <!-- uzun logo -->
-                <a href="index.html" class="logo-sm"><img src="/assets/images/logo_sm.png" height="36"></a> <!-- kısa logo -->
+                <a asp-action="Index" class="logo"><img src="/assets/images/logo_white_2.png" height="28"></a> <!-- uzun logo -->
+                <a asp-action="Index" class="logo-sm"><img src="/assets/images/logo_sm.png" height="36"></a> <!-- kısa logo -->
             </div>
         </div>
         <!-- Button mobile view to collapse sidebar menu -->
@@ -97,7 +97,7 @@
                             <a href="#" id="btn-fullscreen" class="waves-effect waves-light"><i class="fa fa-crosshairs"></i></a>
                         </li>
                         <li class="dropdown">
-                            <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true"><img src="/assets/images/users/avatar-1.jpg" alt="user-img" class="img-circle"> </a>
+                            <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true"><img src="@ViewBag.UserPhoto" alt="user-img" class="img-circle"> </a>
                             <ul class="dropdown-menu">
                                 <li><a href="javascript:void(0)"> Profile</a></li>
                                 <li><a href="javascript:void(0)"><span class="badge badge-success pull-right">5</span> Settings </a></li>
@@ -119,21 +119,21 @@
         <div class="sidebar-inner slimscrollleft">
             <div class="user-details">
                 <div class="text-center">
-                    <img src="/assets/images/users/avatar-1.jpg" alt="" class="img-circle">
+                    <img src="@ViewBag.UserPhoto" alt="" class="img-circle">
                 </div>
                 <div class="user-info">
                     <div class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Admin</a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">@ViewBag.UserFullName</a>
                     </div>
 
-                    <p class="text-muted m-0"><i class="fa fa-dot-circle-o text-success"></i> Online/Offline</p>
+                    <p class="text-muted m-0"><i class="fa fa-dot-circle-o text-success"></i> Online/</p>
                 </div>
             </div>
             <!--- Divider -->
             <div id="sidebar-menu">
                 <ul>
                     <li>
-                        <a href="index.html" class="waves-effect"><i class="fas fa-home"></i><span> Anasayfa </span></a>
+                        <a asp-action="Index" class="waves-effect"><i class="fas fa-home"></i><span> Anasayfa </span></a>
                     </li>
 
                     <li class="has_sub">
@@ -153,6 +153,9 @@
                             <li><a href="icons-ion.html">Kullanıcı Grupları</a></li>
                             <li><a href="icons-fontawesome.html">Grup Yetkileri</a></li>
                         </ul>
+                    </li>
+                    <li>
+                        <a asp-action="InvitePerson" class="waves-effect"><i class="fas fa-user-plus"></i><span> Üye Davet Et</span></a>
                     </li>
                 </ul>
             </div>
