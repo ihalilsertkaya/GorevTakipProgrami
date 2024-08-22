@@ -14,14 +14,6 @@ public class HomeController : BaseController
     
     public IActionResult Index()
     {
-        var userName = HttpContext.Session.GetString("Username");
-        if (string.IsNullOrEmpty(userName))
-        {
-            return RedirectToAction("Login", "Account");
-        }
-        var loggedUser = _context.Users.Where(u => u.Username == userName).FirstOrDefault();
-        ViewBag.UserFullName = loggedUser.FullName;
-        ViewBag.UserPhoto = loggedUser.UserPhoto;
         return View();
     }
 
