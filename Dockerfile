@@ -20,4 +20,4 @@ RUN dotnet publish "GorevTakipProgrami.csproj" -c $BUILD_CONFIGURATION -o /app/p
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "GorevTakipProgrami.exe"]
+ENTRYPOINT ["dotnet", "GorevTakipProgrami.dll"]
