@@ -21,6 +21,8 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          ${{ secrets.SERVER_COMMAND }}
-          docker-compose down || true
-          docker-compose up --build -d
+          cd proje/GorevTakipProgrami
+          docker build -t gorev-takip-programi .
+          docker stop gorev-takip-container || true
+          docker rm gorev-takip-container || true
+          docker run -d --name gorev-takip-container -p 8080:80 gorev-takip-programi
