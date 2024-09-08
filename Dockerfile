@@ -1,5 +1,4 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER $APP_UID
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
@@ -10,7 +9,6 @@ WORKDIR /src
 COPY ["GorevTakipProgrami.csproj", "./"]
 RUN dotnet restore "GorevTakipProgrami.csproj"
 COPY . .
-WORKDIR "/src/"
 RUN dotnet build "GorevTakipProgrami.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
