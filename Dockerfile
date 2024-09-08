@@ -14,4 +14,4 @@ WORKDIR /App
 COPY --from=build-env /App/out .
 
 EXPOSE 80
-ENTRYPOINT ["dotnet", "MuafiyetProjesi2024.dll"]
+ENTRYPOINT ["dotnet", "GorevTakipProgrami.dll"]
