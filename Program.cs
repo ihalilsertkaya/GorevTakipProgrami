@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.UseUrls("http://*:8080"); // 8080 portunu dinle
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
