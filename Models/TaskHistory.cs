@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿using System.ComponentModel.DataAnnotations;
 namespace GorevTakipProgrami.Models;
 
 public partial class TaskHistory
 {
-    public int HistoryId { get; set; }
-
+    [Key]
+    public int TaskHistoryId { get; set; }
     public int? TaskId { get; set; }
-
-    public string? OldStatus { get; set; }
-
     public string? NewStatus { get; set; }
-
-    public DateTime? ChangedAt { get; set; }
-
-    public int? ChangedBy { get; set; }
-
-    public virtual User? ChangedByNavigation { get; set; }
-
+    public DateTime? ChangeDate { get; set; }
+    public int? ChangedByUserId { get; set; }
+    public virtual User? ChangedByUser { get; set; }
     public virtual DBTask? Task { get; set; }
 }
+
+

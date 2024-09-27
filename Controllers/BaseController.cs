@@ -1,4 +1,4 @@
-using GorevTakipProgrami.Data;
+using GorevTakipProgrami.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
@@ -26,8 +26,8 @@ public class BaseController : Controller
         }
         var loggedUser = _context.Users.Where(u => u.Username == userName).FirstOrDefault();
         ViewBag.UserFullName = loggedUser?.FullName;
-        ViewBag.UserPhoto = loggedUser?.UserPhoto;
-
+        ViewBag.UserPhoto = loggedUser?.ProfilePhoto;
+        ViewBag.Users = _context.Users.ToList();
         base.OnActionExecuting(filterContext);
     }
 }

@@ -1,0 +1,99 @@
+@model GorevTakipProgrami.Models.DBTask
+
+@{
+    ViewData["Title"] = "Görev Detayı";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title mb-0">@Model.TaskName</h3>
+            </div>
+            <div class="panel-body">
+                <!-- Task General Info -->
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <div class="d-flex align-items-center">
+
+                            <span class="badge badge-primary text-white">
+                                <i class="fa fa-user mr-2"></i> @(Model.AssignedToUser?.FullName ?? "Atanmamış Kullanıcı")
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="d-flex align-items-center">
+                            <span class="badge badge-warning">
+                                <i class="fa fa-clock-o mr-2"></i> @(Model.DueDate?.ToString("HH:mm - dd MMMMM yyyy") ?? "Son teslim tarihi yok")
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="d-flex align-items-center">
+                            <span class="badge @(Model.Priority == "Yüksek" ? "badge-danger" : Model.Priority == "Orta" ? "badge-warning" : "badge-soft")">
+                                <i class="fa fa-warning mr-2"></i> @Model.Priority
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task Description -->
+                <hr/>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <h5 class="panel-title">Açıklama</h5>
+                        <p class="text-muted">@(Model.TaskDescription ?? "Açıklama yok")</p>
+                    </div>
+                </div>
+
+                <!-- Comments Section -->
+                <hr/>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Yorumlar</h4>
+                        @if (Model.Comments.Any())
+                        {
+                        @foreach (var comment in Model.Comments)
+                        {
+                        <div class="media mb-4">
+                            <!-- Profile Image -->
+                            <img class="mr-3 rounded-circle" src="@comment.User.ProfilePhoto" alt="User Image" width="64" height="64">
+
+                            <div class="media-body">
+                                <!-- User Name and Date in the same line -->
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="mt-0">@comment.User?.FullName</h5>
+                                    <span class="text-muted small">@comment.CommentDate?.ToString("HH:mm - dd MMM yyyy")</span>
+                                </div>
+                                <!-- Comment Text -->
+                                <p>@comment.CommentText</p>
+                            </div>
+                        </div>
+                        <hr/> <!-- Line separator between comments -->
+                        }
+                        }
+                        else
+                        {
+                        <p class="text-muted">Henüz yorum yok.</p>
+                        <hr/>
+                        }
+                    </div>
+                </div>
+
+                <!-- Add Comment Section -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Yorum Yap</h4>
+                        <form asp-action="AddComment" method="post">
+                            <input type="hidden" name="taskId" value="@Model.TaskId"/>
+                            <div class="form-group">
+                                <textarea name="content" class="form-control" rows="3" placeholder="Yorumunuzu buraya yazın..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Gönder</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

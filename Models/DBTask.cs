@@ -7,29 +7,29 @@ public partial class DBTask
 {
     public int TaskId { get; set; }
 
-    public string Title { get; set; } = null!;
+    public string TaskName { get; set; } = null!;
 
-    public string? Description { get; set; }
+    public string? TaskDescription { get; set; }
 
-    public string? Status { get; set; }
+    public string? TaskStatus { get; set; }
 
     public string? Priority { get; set; }
 
-    public DateOnly? DueDate { get; set; }
+    public DateTime? DueDate { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+    public DateTime? CreationDate { get; set; }
 
-    public DateTime? UpdatedAt { get; set; }
+    public DateTime? UpdateDate { get; set; }
 
-    public int? CreatedBy { get; set; }
+    public int? AssignedToUserId { get; set; }
 
-    public virtual User? CreatedByNavigation { get; set; }
+    public int? AssignedByUserId { get; set; }
 
-    public virtual ICollection<TaskComment> TaskComments { get; set; } = new List<TaskComment>();
+    public virtual User? AssignedByUser { get; set; }
 
-    public virtual ICollection<TaskHistory> TaskHistories { get; set; } = new List<TaskHistory>();
+    public virtual User? AssignedToUser { get; set; }
 
-    public virtual ICollection<TaskNotification> TaskNotifications { get; set; } = new List<TaskNotification>();
+    public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
-    public virtual ICollection<UserTask> UserTasks { get; set; } = new List<UserTask>();
+    public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
 }

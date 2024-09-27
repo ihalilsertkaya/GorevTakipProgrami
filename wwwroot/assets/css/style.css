@@ -531,6 +531,7 @@ a:focus {
    Alerts
 ============= */
 .alert {
+  margin: 10px;
   position: relative;
   border: 0;
 }

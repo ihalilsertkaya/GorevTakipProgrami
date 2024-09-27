@@ -9,25 +9,23 @@ public partial class User
 
     public string Username { get; set; } = null!;
 
+    public string Password { get; set; } = null!;
+
+    public string FullName { get; set; } = null!;
+
     public string Email { get; set; } = null!;
 
-    public string PasswordHash { get; set; } = null!;
-
-    public string? FullName { get; set; }
+    public string? ProfilePhoto { get; set; }
 
     public string? Role { get; set; }
-    
-    public string? UserPhoto { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+    public DateTime? RegistrationDate { get; set; }
 
-    public virtual ICollection<TaskComment> TaskComments { get; set; } = new List<TaskComment>();
+    public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
-    public virtual ICollection<TaskHistory> TaskHistories { get; set; } = new List<TaskHistory>();
+    public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
 
-    public virtual ICollection<TaskNotification> TaskNotifications { get; set; } = new List<TaskNotification>();
+    public virtual ICollection<DBTask> TaskAssignedByUsers { get; set; } = new List<DBTask>();
 
-    public virtual ICollection<DBTask> Tasks { get; set; } = new List<DBTask>();
-
-    public virtual ICollection<UserTask> UserTasks { get; set; } = new List<UserTask>();
+    public virtual ICollection<DBTask> TaskAssignedToUsers { get; set; } = new List<DBTask>();
 }

@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-md-12">
+        <section id="cd-timeline" class="cd-container">
+            @foreach (var history in Model)
+            {
+            <!-- New Status Timeline Block -->
+            <div class="cd-timeline-block">
+                <div class="cd-timeline-img cd-success">
+                    <i class="fa fa-arrow-right"></i>
+                </div> <!-- cd-timeline-img -->
+
+                <div class="cd-timeline-content">
+                    <h3>@history.NewStatus</h3>
+                    <p>
+                        <i class="fa fa-user"></i> @history.ChangedByUser?.FullName
+                        <br/>
+                        <i class="fa fa-clock-o"></i> @history.ChangeDate.ToString("HH:mm - dd MMM yyyy ")
+                    </p>
+                    <span class="cd-date">@history.ChangeDate.ToString("dd-MM-yyyy")</span>
+                </div> <!-- cd-timeline-content -->
+            </div> <!-- cd-timeline-block -->
+            }
+        </section> <!-- cd-timeline -->
+    </div>
+</div><!-- Row -->

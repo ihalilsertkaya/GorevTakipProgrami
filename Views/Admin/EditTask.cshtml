@@ -1,0 +1,53 @@
+@model GorevTakipProgrami.Models.DBTask
+
+@{
+ViewData["Title"] = "Görev Düzenle";
+}
+
+<h2>Görev Düzenle</h2>
+@if(ViewData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewData["ErrorMessage"]
+    </div>
+}else if(ViewData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewData["SuccessMessage"]
+    </div>
+}
+<form asp-action="UpdateTask" method="post">
+    <input type="hidden" name="taskId" value="@Model.TaskId"/>
+
+    <div class="form-group">
+        <label for="TaskName">Görev Adı</label>
+        <input type="text" class="form-control" id="TaskName" name="TaskName" value="@Model.TaskName" required/>
+    </div>
+    <div class="form-group">
+        <label for="TaskDescription">Görev Açıklaması</label>
+        <textarea class="form-control" id="TaskDescription" name="TaskDescription" rows="3">@Model.TaskDescription</textarea>
+    </div>
+    <div class="form-group">
+        <label for="TaskStatus">Durum</label>
+        <select class="form-control" id="TaskStatus" name="TaskStatus">
+            <option value="Baslanmadi" selected="@(Model.TaskStatus == "Başlanmadı" ? "selected" : "")">Başlanmadı</option>
+            <option value="Devam ediyor" selected="@(Model.TaskStatus == "Devam ediyor" ? "selected" : "")">Devam ediyor</option>
+            <option value="Bitti" selected="@(Model.TaskStatus == "Bitti" ? "selected" : "")">Bitti</option>
+            <option value="Ertelendi" selected="@(Model.TaskStatus == "Ertelendi" ? "selected" : "")">Ertelendi</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="Priority">Öncelik</label>
+        <select class="form-control" id="Priority" name="Priority">
+            <option value="Düşük" selected="@(Model.Priority == "Düşük" ? "selected" : "")">Düşük</option>
+            <option value="Orta" selected="@(Model.Priority == "Orta" ? "selected" : "")">Orta</option>
+            <option value="Yüksek" selected="@(Model.Priority == "Yüksek" ? "selected" : "")">Yüksek</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="DueDate">Bitiş Tarihi</label>
+        <input type="date" class="form-control" id="DueDate" name="DueDate" value="@Model.DueDate?.ToString("yyyy-MM-dd")"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+    <a asp-action="Tasks" class="btn btn-secondary">İptal</a>
+</form>

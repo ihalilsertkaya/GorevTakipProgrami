@@ -31,9 +31,21 @@
         //creating demo tabels
         $('#datatable').dataTable();
         $('#datatable-keytable').DataTable({keys: true});
-        $('#datatable-responsive').DataTable();
+        $('#datatable-responsive').DataTable({
+            language:{
+                paginate:{
+                    previous:"<i class='mdi mdi-chevron-left'>",
+                    next:"<i class='mdi mdi-chevron-right'>"
+                },
+                info: 'Showing page _PAGE_ of _PAGES_',
+                infoEmpty: 'No records available',
+                infoFiltered: '(filtered from _MAX_ total records)',
+                lengthMenu: 'Display _MENU_ records per page',
+                zeroRecords: 'Nothing found - sorry'
+            }
+        });
         $('#datatable-scroller').DataTable({
-            ajax: "assets/plugins/datatables/json/scroller-demo.json",
+            ajax: "/assets/plugins/datatables/json/scroller-demo.json",
             deferRender: true,
             scrollY: 380,
             scrollCollapse: true,

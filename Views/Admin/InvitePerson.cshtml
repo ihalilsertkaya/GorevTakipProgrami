@@ -1,0 +1,86 @@
+@model IEnumerable<InvitePersonToken> 
+@{
+    ViewData["Title"] = "Davet İşlemleri";
+}
+<div class="row">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title text-white">Kullanıcı Davet Et</h3>
+        </div>
+        <form asp-action="InvitePerson" method="post">
+            @if (ViewBag.Success != null)
+            {
+                <div class="alert alert-success" role="alert">
+                    <span>@ViewBag.Success</span>
+                </div>
+            }
+            else if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @foreach (var key in ViewData.ModelState.Keys)
+                    {
+                        foreach (var error in ViewData.ModelState[key].Errors)
+                        {
+                            <span>@error.ErrorMessage</span>
+                            <br/>
+                        }
+                    }
+                </div>
+            }
+            <div class="form-group">
+                <input type="email" placeholder="ornek@mail.com" name="InviteMail" required class="form-control text-white"/>
+                <button type="submit" class="m-t-10 m-b-10 btn btn-success"><i class="fa fa-send"></i> Gönder</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Davetli Kullanıcılar</h3>
+        </div>
+        <div class="panel-body">
+            <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap">
+                <thead>
+                <tr>
+                    <th class="text-center">Mail</th>
+                    <th class="text-center">Bitiş Tarihi</th>
+                    <th class="text-center">Kullanım</th>
+                    <th class="text-center">Davet Eden</th>
+                    <th class="text-center">İşlemler</th>
+                </tr>
+                </thead>
+                <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td class="text-left">@user.Email</td>
+                            <td class="text-center @(user.IsUsed || user.ExpiryDate < DateTime.Now ? "danger" : "success")">@(user.ExpiryDate < DateTime.Now ? "Süresi Doldu" : user.ExpiryDate)</td>
+                            <td class="text-center">@(user.IsUsed)</td>
+                            <td class="text-center">@user.InvitedByUser</td>
+                            <td class="text-center">
+                                <form method="post">
+                                    <button title="Süreyi 1 gün uzat" asp-action="AddInviteTime" asp-route-inviteId="@user.Id" class="btn-warning btn">
+                                        <i class="fa fa-clock-o"></i>
+                                    </button>
+                                    <button title="Daveti iptal et" asp-action="DeleteInvite" asp-route-inviteId="@user.Id" class="btn btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5" class="text-center">Davetli kullanıcılar yüklenemedi.</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<GorevTakipProgrami.Models.DBTask>
+@{
+    ViewData["Title"] = "AnaSayfa";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">Son Görevler</h4>
+            </div>
+            <div class="panel-body">
+                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap">
+                    <thead class="text-primary">
+                    <tr>
+                        <th>Görev Adı</th>
+                        <th>Durum</th>
+                        <th>Öncelik</th>
+                        <th>Atanan Kişi</th>
+                        <th>Teslim Tarihi</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var task in Model)
+                    {
+                        <tr>
+                            <td>@task.TaskName</td>
+                            <td>
+                                <span class="badge @(task.TaskStatus == "Başlanmadı" ? "badge-secondary" : 
+                                        task.TaskStatus == "Bitti" ? "badge-success" : 
+                                        task.TaskStatus == "Devam ediyor" ? "badge-primary" : 
+                                        task.TaskStatus == "Ertelendi" ? "badge-warning" : "badge-light")">@task.TaskStatus </span>
+                            </td>
+                            <td>
+                                <span class="badge @(task.Priority == "Yüksek" ? "badge-danger" : 
+                                        task.Priority == "Orta" ? "badge-warning" : "badge-soft")">@task.Priority</span>
+                            </td>
+                            <td>@task.AssignedToUser.FullName</td>
+                            <td>@task.DueDate?.ToString("dd-MM-yyyy")</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

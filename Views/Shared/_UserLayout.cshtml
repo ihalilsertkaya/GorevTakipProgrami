@@ -68,11 +68,11 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a asp-controller="Admin" asp-action="Profile"> Profil</a>
+                                <a asp-action="Profile"> Profil</a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a asp-controller="Admin" asp-action="Logout"> Çıkış yap</a>
+                                <a asp-action="Logout"> Çıkış yap</a>
                             </li>
                         </ul>
                     </li>
@@ -103,7 +103,7 @@
         <div id="sidebar-menu">
             <ul>
                 <li>
-                    <a asp-action="Index" class="waves-effect">
+                    <a asp-controller="User" asp-action="Index" class="waves-effect">
                         <i class="fas fa-home"></i>
                         <span>
                             Anasayfa
@@ -129,32 +129,6 @@
                         </li>
                         <li>
                             <a asp-action="UnFinishedTasks">Tamamlanmamış</a>
-                        </li>
-                        <li>
-                            <a asp-action="AssignedTasks">Atanmış Görevler</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect">
-                        <i class="fas fa-address-card"></i>
-                        <span> Kullanıcı İşlemleri </span>
-                        <span class="pull-right">
-                            <i
-                                class="mdi mdi-plus">
-                            </i>
-                        </span>
-                    </a>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a asp-action="Users">
-                                <i class="fa fa-user"></i><span> Tüm Kullanıcılar</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a asp-action="InvitePerson">
-                                <i class="fas fa-user-plus"></i><span> Kullanıcı Davet Et</span>
-                            </a>
                         </li>
                     </ul>
                 </li>
